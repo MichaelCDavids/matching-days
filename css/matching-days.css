@@ -1,0 +1,33 @@
+table{
+   text-align: center;
+   margin:auto;
+   padding: 10px;
+   border: solid black 1px;
+   border-spacing: 11px 0;
+}
+th,td{
+   width: 110px;
+   text-align: center;
+   border: solid black 1px;
+}
+
+.six.columns{
+   text-align: center;
+}
+.date-one{
+   margin-top: 2em;
+}
+.date-two{
+   margin-top: 2em;
+}
+.firstDay {
+   background-color: #342DF4;
+}
+
+.secondDay{
+   background-color: #B74028;
+}
+
+.matchingDays{
+   background-color: #B8F01F;
+}

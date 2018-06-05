@@ -20,8 +20,10 @@ function MatchingDays(){
          var dayOne = new Date(dateOne);
          var dayTwo = new Date(dateTwo);
          if(weekdays[dayOne.getDay()] === weekdays[dayTwo.getDay()]){
-           return weekdays[dayOne] == weekdays[dayTwo];
-         }
+           return true
+        }else{
+           return false
+        }
       }
    }
 

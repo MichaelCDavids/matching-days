@@ -1,49 +1,37 @@
-document.addEventListener('DOMContentLoaded',function() {
-  var dateOne = document.querySelector('input[name="dateOne"]');
-  var dateTwo = document.querySelector('input[name="dateTwo"]');
-  var days = document.querySelectorAll('.days');
-  var message = document.querySelector("#message");
+//Getting references to the dates
+var dateOne = document.querySelector('input[name="dateOne"]');
+var dateTwo = document.querySelector('input[name="dateTwo"]');
 
-  var MatchingDaysInstance = MatchingDays();
+//ref to template
+var templateSource = document.querySelector(".MatchingDaysTemplate").innerHTML;
 
-  function clearStyles(){
-    for (var i = 0; i < days.length; i++) {
-      days[i].classList.remove("firstDay");
-      days[i].classList.remove("secondDay");
-      days[i].classList.remove("matchingDays");
-    }
-  }
+//compile the template
+var templateMatchingDays = Handlebars.compile(templateSource);
 
-  function highlightDay(){
-    var dayOne = dateOne.value;
-    if (dayOne !== ""){dayOne = MatchingDaysInstance.day(dayOne);}
-    else{var dayOne = "";}
+//reference to the place to insert template
+var insertDataElement = document.querySelector(".insertMatchingDaysTemplate");
 
-    var dayTwo = dateTwo.value;
-    if (dayTwo !== ""){dayTwo = MatchingDaysInstance.day(dayTwo);}
-    else{var dayTwo = "";}
+//instance of the factory function
+var MatchingDaysInstance = MatchingDays();
 
-    if(dayOne!=="" && dayTwo==="" && dayOne!==dayTwo){
-      days[dayOne].classList.add('firstDay');
-      message.innerHTML = "Please select a second date";
-    }else if(dayTwo!=="" && dayOne==="" && dayOne!==dayTwo){
-      days[dayTwo].classList.add('secondDay');
-      message.innerHTML = "Please select first date";
-    }else if(dayOne===dayTwo && dayOne!=="" && dayTwo!==""){
-      days[dayOne].classList.add("matchingDays");
-      message.innerHTML = "These dates have a matching day";
-    }else if(dayOne!==dayTwo && dayOne!=="" && dayTwo!==""){
-      days[dayOne].classList.add('firstDay');
-      days[dayTwo].classList.add('secondDay');
-      message.innerHTML = "These dates do not have matching days";
-    }
-  }
-  dateOne.addEventListener('change', function(){
-    clearStyles();
-    highlightDay();
+
+//on page load event
+window.addEventListener('load',function(){
+  insertDataElement.innerHTML = templateMatchingDays({
+    days : MatchingDaysInstance.highlight()
   });
-  dateTwo.addEventListener('change', function(){
-    clearStyles();
-    highlightDay();
+});
+
+//change event when dateOne has been entered
+dateOne.addEventListener('change', function(){
+  insertDataElement.innerHTML = templateMatchingDays({
+    days : MatchingDaysInstance.highlight(dateOne.value , dateTwo.value)
   });
-},false);
+});
+
+//change event when dateTwo has been entered
+dateTwo.addEventListener('change', function(){
+  insertDataElement.innerHTML = templateMatchingDays({
+    days : MatchingDaysInstance.highlight(dateOne.value, dateTwo.value)
+  });
+});

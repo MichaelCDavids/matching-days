@@ -11,6 +11,12 @@ th,td{
    border: solid black 1px;
 }
 
+
+
+.box{
+  border: 1px solid black;
+}
+
 .six.columns{
    text-align: center;
 }

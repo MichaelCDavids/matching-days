@@ -1,5 +1,6 @@
 function MatchingDays(){
-
+   var newDayOne = "";
+   var newDayTwo = "";
    const weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
    function getDay(date){
@@ -51,7 +52,26 @@ function MatchingDays(){
       return days;
    }
 
+   function setDateOne(date){
+      var newDayOne = date;
+      return newDayOne;
+   }
+   function setDateTwo(date){
+      var newDayTwo = date;
+      return newDayTwo;
+   }
+   function getDateOne(){
+      return newDayOne;
+   }
+   function getDateTwo(){
+      return newDayTwo;
+   }
+
    return {
+      setOneDay : setDateOne,
+      getOneDay : getDateOne,
+      setTwoDay : setDateTwo,
+      getTwoDay : getDateTwo,
       indexOfDay : getDay,
       dayInWeek : dayOfWeek,
       match : matchDay,

@@ -52,6 +52,9 @@ function MatchingDays(){
    }
 
    return {
+      indexOfDay : getDay,
+      dayInWeek : dayOfWeek,
+      match : matchDay,
       highlight : highlightDays
    }
 }

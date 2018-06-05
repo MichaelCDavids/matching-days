@@ -36,16 +36,16 @@ function MatchingDays(){
             day : currentIndex
          }
          if(dayOfWeek(dateOne) === currentIndex ){
-            days[currentIndex] = Object.assign({'Day1':'firstDay'}, days[currentIndex]);
+            days[currentIndex] = Object.assign({"Day1":"firstDay"}, days[currentIndex]);
             if (matchDay(dateOne, dateTwo)) {
               delete days[currentIndex].Day1;
-              days[currentIndex] = Object.assign({'DaysMatch': 'matchingDays'}, days[currentIndex]);
+              days[currentIndex] = Object.assign({"DaysMatch": "matchingDays"}, days[currentIndex]);
             }
          }else if(dayOfWeek(dateTwo) === currentIndex){
-            days[currentIndex] = Object.assign({'Day2':'secondDay'}, days[currentIndex]);
+            days[currentIndex] = Object.assign({"Day2":"secondDay"}, days[currentIndex]);
             if (matchDay(dateOne, dateTwo)) {
              delete days[currentIndex].Day2;
-             days[currentIndex] = Object.assign({'DaysMatch': 'matchingDays'}, days[currentIndex]);
+             days[currentIndex] = Object.assign({"DaysMatch": "matchingDays"}, days[currentIndex]);
            }
          }
       }

@@ -33,24 +33,56 @@ describe('The matchDay Function',function(){
    });
 });
 describe('The highlightDays Function',function(){
+
+   it('should assign firstDay and class to the day it lands on if first date has been entered', function() {
+      var matchingDaysInstance = MatchingDays();
+      assert.deepEqual(matchingDaysInstance.highlight("12-02-1992"),
+      { Friday: {day: "Friday"},
+      Monday: {day: "Monday"},
+      Saturday: {day: "Saturday"},
+      Sunday: {day: "Sunday"},
+      Thursday: {day: "Thursday"},
+      Tuesday: {day: "Tuesday"},
+      Wednesday: {Day1 : "firstDay", day: "Wednesday"}
+      });
+   });
+
+   it('should assign secondDay and class to the day it lands on if second date has been entered', function() {
+      var matchingDaysInstance = MatchingDays();
+      assert.deepEqual(matchingDaysInstance.highlight("00-00-0000","12-03-1992"),
+      { Friday: {day: "Friday"},
+      Monday: {day: "Monday"},
+      Saturday: {day: "Saturday"},
+      Sunday: {day: "Sunday"},
+      Thursday: {Day2 : "secondDay", day: "Thursday"},
+      Tuesday: {day: "Tuesday"},
+      Wednesday: {day: "Wednesday"}
+      });
+   });
+
+   it('should assign firstDay and secondDay classes to the days it lands on and if different dates have been entered', function() {
+      var matchingDaysInstance = MatchingDays();
+      assert.deepEqual(matchingDaysInstance.highlight("12-02-1992", "12-03-1992"),
+      { Friday: {day: "Friday"},
+      Monday: {day: "Monday"},
+      Saturday: {day: "Saturday"},
+      Sunday: {day: "Sunday"},
+      Thursday: {Day2 : "secondDay",day: "Thursday"},
+      Tuesday: {day: "Tuesday"},
+      Wednesday: {Day1 : "firstDay", day: "Wednesday"}
+      });
+   });
+
    it('should assign matchingDays class if the same dates have been entered', function() {
-
-    var matchingDaysInstance = MatchingDays();
-    matchingDaysInstance.setOneDay("12-02-1992");
-    matchingDaysInstance.setTwoDay("12-02-1992")
-    let dateOne = matchingDaysInstance.getOneDay();
-    let dateTwo = matchingDaysInstance.getTwoDay();
-
-    assert.deepEqual(matchingDaysInstance.highlight(dateOne, dateTwo),
-       {
-         Sunday: {dayId: "Sunday",dayName: "Sunday"},
-         Monday: {dayId: "Monday",dayName: "Monday"},
-         Tuesday: {dayId: "Tuesday",dayName: "Tuesday"},
-         Wednesday: {DaysMatch: "matchingDays",dayId: "Wednesday",dayName: "Wednesday"},
-         Thursday: {dayId: "Thursday",dayName: "Thursday"},
-         Friday: {dayId: "Friday",dayName: "Friday"},
-         Saturday: {dayId: "Saturday",dayName: "Saturday"}
-      }
-    );
-  });
+      var matchingDaysInstance = MatchingDays();
+      assert.deepEqual(matchingDaysInstance.highlight("12-02-1992", "12-02-1992"),
+      { Friday: {day: "Friday"},
+      Monday: {day: "Monday"},
+      Saturday: {day: "Saturday"},
+      Sunday: {day: "Sunday"},
+      Thursday: {day: "Thursday"},
+      Wednesday: {DaysMatch : "matchingDays", day: "Wednesday"},
+      Tuesday: {day: "Tuesday"}
+      });
+   });
 });
